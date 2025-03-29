@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SERVER_PORT=8080
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=llamachat
+      - DB_PASSWORD=llamachat
+      - DB_NAME=llamachat
+      - JWT_SECRET=your-secure-jwt-secret-change-in-production
+      - AI_API_KEY=your-openai-api-key
+    depends_on:
+      - postgres
+    restart: unless-stopped
+    volumes:
+      - ./config.json:/home/appuser/app/config/config.json
+      - ./uploads:/home/appuser/app/uploads
+
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=llamachat
+      - POSTGRES_PASSWORD=llamachat
+      - POSTGRES_DB=llamachat
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U llamachat"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: ["redis-server", "--appendonly", "yes"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8081:8080"
+    environment:
+      - ADMINER_DEFAULT_SERVER=postgres
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
+  redis_data: 

@@ -1,0 +1,85 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+bin/
+dist/
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+coverage.html
+
+# Dependency directories
+vendor/
+
+# IDE and editor folders
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Config files with sensitive information
+config.development.json
+config.production.json
+config.local.json
+
+# Build output
+/llamachat
+
+# Database volume data
+/data/
+
+# Uploaded files
+/uploads/
+
+# Redis data
+dump.rdb
+
+# Temporary files
+/tmp/
+/temp/
+
+# Swagger docs
+/docs/api/
+
+# Node.js / Vue.js
+/web/node_modules/
+/web/.pnp
+/web/.pnp.js
+/web/coverage
+/web/dist
+/web/.env.local
+/web/.env.*.local
+/web/npm-debug.log*
+/web/yarn-debug.log*
+/web/yarn-error.log*
+
+# Certificates and keys
+*.pem
+*.key
+*.crt
+*.csr
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Compiled templates
+*.tmpl.go 

@@ -71,7 +71,7 @@ llamachat/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/llamasearch/llamachat.git
+   git clone https://llamasearch.ai
    cd llamachat
    ```
 
